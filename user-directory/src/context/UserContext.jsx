@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
-export const UserContext = createContext();
+export const UserContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
@@ -22,11 +22,8 @@ export const UserProvider = ({ children }) => {
     fetchUsers();
   }, []);
 
-  const contextValue = { users, loading, error };
-  console.log("Provider context value:", contextValue); // Add this for debugging
-
   return (
-    <UserContext.Provider value={contextValue}>
+    <UserContext.Provider value={{ users, loading, error }}>
       {children}
     </UserContext.Provider>
   );
